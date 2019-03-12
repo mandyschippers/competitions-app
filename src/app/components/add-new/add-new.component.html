@@ -1,0 +1,13 @@
+<div fxLayout="column" [formGroup]="competitionForm">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput type="text" formControlName="title">
+  </mat-form-field>
+  <div *ngIf="competitionForm.get('title').dirty && competitionForm.get('title').hasError('required')">
+    You have to enter a title
+  </div>
+  <div *ngIf="competitionForm.get('title').dirty && competitionForm.get('title').hasError('uniqueTitle')">
+    This title already exists, please choose a unique title
+  </div>
+  <button mat-button (click)="addCompetition()"> Add competition </button>
+</div>

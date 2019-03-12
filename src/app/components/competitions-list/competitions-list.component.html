@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="space-between">
+  
+  <app-add-new></app-add-new>
+  
+  <mat-list>
+    <app-competition-list-item 
+      *ngFor="let competition of competitions$ | async"
+      [competition]="competition"
+    >
+    </app-competition-list-item>
+  </mat-list>
+
+</div>
