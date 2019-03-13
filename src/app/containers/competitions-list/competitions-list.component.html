@@ -1,13 +1,12 @@
-<div fxLayout="column" fxLayoutAlign="space-between">
-  
+<mat-card fxFlex="50">
   <app-add-new></app-add-new>
-  
+
   <mat-list>
-    <app-competition-list-item 
+    <app-competition-list-item
       *ngFor="let competition of competitions$ | async"
       [competition]="competition"
     >
     </app-competition-list-item>
   </mat-list>
+</mat-card>
 
-</div>

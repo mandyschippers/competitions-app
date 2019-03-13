@@ -4,7 +4,7 @@ import { Competition } from './../../services/competition.service';
 @Component({
   selector: 'app-competition-list-item',
   templateUrl: './competition-list-item.component.html',
-  styleUrls: ['./competition-list-item.component.css']
+  styleUrls: ['./competition-list-item.component.scss']
 })
 export class CompetitionListItemComponent {
    @Input() competition: Competition;

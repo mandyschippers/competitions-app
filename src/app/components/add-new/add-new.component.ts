@@ -1,12 +1,12 @@
 import { Component, ChangeDetectionStrategy} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CompetitionService } from './../../services/competition.service';
-import { uniqueTitleValidator } from './../../shared/unique-title.validator';
+import { uniqueTitleValidator } from './../../common/unique-title.validator';
 
 @Component({
   selector: 'app-add-new',
   templateUrl: './add-new.component.html',
-  styleUrls: ['./add-new.component.css'],
+  styleUrls: ['./add-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddNewComponent {
@@ -30,9 +30,13 @@ export class AddNewComponent {
    }
 
   addCompetition() {
+    const titleField = this.competitionForm.get('title');
+    if ( titleField.value === '') {
+      titleField.markAsTouched();
+    }
     if (this.competitionForm.valid) {
       this.competitionService.addCompetition(
-        this.competitionForm.get('title').value
+        titleField.value
       );
       this.competitionForm.reset();
     }

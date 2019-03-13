@@ -7,7 +7,7 @@ import { AddNewComponent } from './components/add-new/add-new.component';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
   title = 'Welcome!';

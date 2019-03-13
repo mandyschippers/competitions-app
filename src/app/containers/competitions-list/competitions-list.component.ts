@@ -6,7 +6,7 @@ import { CompetitionService, Competition } from './../../services/competition.se
 @Component({
   selector: 'app-competitions-list',
   templateUrl: './competitions-list.component.html',
-  styleUrls: ['./competitions-list.component.css']
+  styleUrls: ['./competitions-list.component.scss']
 })
 export class CompetitionsListComponent {
 
@@ -19,7 +19,7 @@ export class CompetitionsListComponent {
   ) {
     this.competitions$ = competitionService.competitions$
       .pipe(
-        map( competitions => {
+        map(competitions => {
             return competitions.map((competition, idx: number) => {
                 return {
                   ...competition,
@@ -32,6 +32,7 @@ export class CompetitionsListComponent {
       );
    }
 
+  /* I use this to remove subcriptions onDestroy (using `takeUntil`) if I don't use async pipe in template */
   //  ngOnDestroy() {
   //    this.onDestroy.next();
   //    this.onDestroy.complete();

@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-competition',
   templateUrl: './competition.component.html',
-  styleUrls: ['./competition.component.css'],
+  styleUrls: ['./competition.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompetitionComponent implements OnInit {

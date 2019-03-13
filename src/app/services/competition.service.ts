@@ -10,7 +10,9 @@ export interface Competition {
 
 const COMPETITIONS_URL = '/db/competitions.json';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CompetitionService {
 
   private competitionsSubject = new BehaviorSubject<Competition[]>([]);
