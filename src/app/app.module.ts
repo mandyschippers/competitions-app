@@ -15,8 +15,6 @@ import { AppComponent } from './app.component';
 import { AddNewComponent } from './components/add-new/add-new.component';
 import { CompetitionListItemComponent } from './components/competition-list-item/competition-list-item.component';
 
-import { CompetitionService } from './services/competition.service';
-
 const routes: Routes = [
   { path: 'competitions', component: CompetitionsListComponent },
   { path: 'competition/:id', component: CompetitionComponent },

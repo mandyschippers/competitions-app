@@ -1,8 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Observable, Subject  } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { CompetitionService, Competition } from './services/competition.service';
-import { AddNewComponent } from './components/add-new/add-new.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-app',
@@ -10,8 +6,5 @@ import { AddNewComponent } from './components/add-new/add-new.component';
   styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
-  title = 'Welcome!';
-
   constructor() {}
-
 }

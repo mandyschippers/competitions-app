@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -8,7 +8,7 @@ import { PageNotFoundComponent } from './containers/page-not-found/page-not-foun
 import { AddNewComponent } from './components/add-new/add-new.component';
 import { CompetitionListItemComponent } from './components/competition-list-item/competition-list-item.component';
 
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './common/material/material.module';
@@ -21,16 +21,6 @@ describe( 'AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let el: DebugElement;
 
-  const routes: Routes = [
-    { path: 'competitions', component: CompetitionsListComponent },
-    { path: 'competition/:id', component: CompetitionComponent },
-    {
-      path: '',
-      redirectTo: '/competitions',
-      pathMatch: 'full'
-    },
-    { path: '**', component: PageNotFoundComponent }
-  ];
   beforeEach( () => {
     TestBed.configureTestingModule( {
       declarations: [
@@ -49,7 +39,7 @@ describe( 'AppComponent', () => {
         MaterialModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(
-          routes
+          []
         )
       ],
       providers: [
@@ -65,7 +55,7 @@ describe( 'AppComponent', () => {
   } );
 
   it( `should render the header`, () => {
-    const header = el.queryAll(By.css('header'));
+    const header = fixture.nativeElement.querySelectorAll('header');
     expect(header.length).toEqual(1);
   } );
 } );

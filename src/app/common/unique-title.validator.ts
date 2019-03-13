@@ -1,6 +1,5 @@
-import { Directive, Input } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { Competition, CompetitionService } from './../services/competition.service';
+import { CompetitionService } from './../services/competition.service';
 
 
 export function uniqueTitleValidator( competitionsService: CompetitionService ): ValidatorFn {

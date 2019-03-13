@@ -1,7 +1,7 @@
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 
-import { BehaviorSubject, of } from 'rxjs';
-import { CompetitionService, Competition } from './../../services/competition.service';
+
+import { CompetitionService } from './../../services/competition.service';
 
 import { CompetitionsListComponent } from './competitions-list.component';
 import { AddNewComponent } from './../../components/add-new/add-new.component';
@@ -14,31 +14,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './../../common/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
-import { COMPETITION_LIST } from './competition-list.component.spec.mock';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { DebugElement } from '@angular/core';
+import { MockCompetitionService } from 'src/app/common/mocks/competition-service.mock';
 
-
-fdescribe( 'CompetitionsListComponent', () => {
-
-  const routes: Routes = [
-    { path: 'competitions', component: CompetitionsListComponent },
-    { path: 'competition/:id', component: CompetitionComponent },
-    {
-      path: '',
-      redirectTo: '/competitions',
-      pathMatch: 'full'
-    },
-    { path: '**', component: PageNotFoundComponent }
-  ];
-
-  const competitionService = jasmine.createSpyObj('CompetitionService', ['fetchCompetitions']);
-  const fetchCompetitionsSpy = competitionService.fetchCompetitions.and.returnValue(of(COMPETITION_LIST));
+describe( 'CompetitionsListComponent', () => {
 
   let component: CompetitionsListComponent;
   let fixture: ComponentFixture<CompetitionsListComponent>;
-  let el: DebugElement;
 
   beforeEach( () => {
     TestBed.configureTestingModule( {
@@ -58,38 +41,42 @@ fdescribe( 'CompetitionsListComponent', () => {
         HttpClientModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(
-          routes
+          []
         )
       ],
       providers: [
-        // CompetitionService
-        { provide: competitionService, useValue: competitionService }
+        { provide: CompetitionService, useClass: MockCompetitionService }
       ]
-    } ).compileComponents().then( () => {
-      fixture = TestBed.createComponent( CompetitionsListComponent );
-      component = fixture.componentInstance;
-      // spyOn( component.competitionService, 'fetchCompetitions' ).and.returnValue( of( COMPETITION_LIST ) );
-    } );
+    } ).compileComponents();
   } );
 
   beforeEach( async () => {
     fixture = TestBed.createComponent( CompetitionsListComponent );
     component = fixture.componentInstance;
-    el = fixture.debugElement;
+    fixture.detectChanges();
   } );
 
   describe( 'component creation', () => {
-    it( 'should call getCompetitions once22', () => {
-      component.competitions$.subscribe( val => console.log( val ) );
-      // fixture.detectChanges();
-      expect( 1 ).toBe( 1 );
-    } );
-  } );
+    let listItems: HTMLElement[];
 
-  afterEach( () => {
-    // getCompetitionsSpy.calls.reset();
-  } );
+    it('should fetch competitions and render the same amount of list items', (done: DoneFn) => {
 
-} );
+      component.competitions$.subscribe( competitions => {
+        listItems = fixture.nativeElement.querySelectorAll('mat-list-item');
+        expect(competitions.length).toEqual(listItems.length);
+        done();
+      });
+    });
+
+    // it('when I click a competition I should catch a click event', (done: DoneFn) => {
+    //   const listItem = listItems[0];
+    //   listItem.dispatchEvent(new Event('click'));
+    //   fixture.detectChanges();
+
+    //   // test if route is actived. To do...
+    // });
+  });
+
+});
 
 

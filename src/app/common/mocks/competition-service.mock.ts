@@ -1,21 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Competition } from '../models/competition.model';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { COMPETITION_LIST } from 'src/app/containers/competitions-list/competition-list.component.spec.mock';
+import { Competition } from 'src/app/models/competition.model';
 
-
-const COMPETITIONS_URL = '/db/competitions.json';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class CompetitionService {
+export class MockCompetitionService {
 
   private competitionsSubject = new BehaviorSubject<Competition[]>([]);
   competitions$ = this.competitionsSubject.asObservable();
 
   constructor(
-    private http: HttpClient
   ) {
     this.fetchCompetitions()
       .subscribe(competitions => {
@@ -23,7 +15,7 @@ export class CompetitionService {
       });
   }
 
-  addCompetition(title: string): void {
+  addCompetition( title: string ): void {
     const competitions = [
       ...this.competitionsSubject.value,
       {
@@ -44,7 +36,7 @@ export class CompetitionService {
   }
 
   fetchCompetitions(): Observable<Competition[]> {
-    return this.http.get<Competition[]>( COMPETITIONS_URL );
+    return of(COMPETITION_LIST);
   }
 
 }

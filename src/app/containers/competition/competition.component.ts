@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { CompetitionService, Competition } from './../../services/competition.service';
+import { CompetitionService } from './../../services/competition.service';
 import { Observable, of } from 'rxjs';
+import { Competition } from 'src/app/models/competition.model';
 
 @Component({
   selector: 'app-competition',
